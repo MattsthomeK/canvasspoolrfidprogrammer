@@ -793,10 +793,20 @@ struct EditFilamentView: View {
     var onSave: (FilamentProfile) -> Void = { _ in }
     @Environment(\.dismiss) var dismiss
 
-    @State private var type: FilamentType = .pla
-    @State private var subtypeId: UInt8 = 0
-    @State private var extruderMin = 200
-    @State private var extruderMax = 220
+    @State private var type: FilamentType
+    @State private var subtypeId: UInt8
+    @State private var extruderMin: Int
+    @State private var extruderMax: Int
+
+    init(database: FilamentDatabase, profile: FilamentProfile, onSave: @escaping (FilamentProfile) -> Void = { _ in }) {
+        self._database = ObservedObject(wrappedValue: database)
+        self.profile = profile
+        self.onSave = onSave
+        _type = State(initialValue: profile.type)
+        _subtypeId = State(initialValue: profile.subtypeId)
+        _extruderMin = State(initialValue: profile.temperatures.extruderMin)
+        _extruderMax = State(initialValue: profile.temperatures.extruderMax)
+    }
 
     var body: some View {
         NavigationStack {
@@ -856,12 +866,6 @@ struct EditFilamentView: View {
                     extruderMin = subtype.extruderMin
                     extruderMax = subtype.extruderMax
                 }
-            }
-            .onAppear {
-                type = profile.type
-                subtypeId = profile.subtypeId
-                extruderMin = profile.temperatures.extruderMin
-                extruderMax = profile.temperatures.extruderMax
             }
         }
     }
