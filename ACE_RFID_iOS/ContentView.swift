@@ -70,7 +70,7 @@ struct ContentView: View {
                 .padding(.vertical)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Canvas Spool Programmer")
+            .navigationTitle("Canvas RFID")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
