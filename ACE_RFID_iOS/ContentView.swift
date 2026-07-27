@@ -303,11 +303,8 @@ struct FilamentSelectionCard: View {
                 VStack(spacing: 12) {
                     Divider()
                     
-                    DetailRow(icon: "building.2", label: "Brand", value: profile.brand)
                     DetailRow(icon: "tag", label: "Type", value: profile.type.rawValue)
-                    if !profile.sku.isEmpty {
-                        DetailRow(icon: "barcode", label: "SKU", value: profile.sku)
-                    }
+                    DetailRow(icon: "atom", label: "Subtype", value: profile.subtypeName)
                     
                     Divider()
                     
@@ -322,12 +319,6 @@ struct FilamentSelectionCard: View {
                                 icon: "flame",
                                 label: "Extruder",
                                 range: "\(profile.temperatures.extruderMin)-\(profile.temperatures.extruderMax)°C"
-                            )
-                            
-                            TemperatureBadge(
-                                icon: "square.3.layers.3d.down.left",
-                                label: "Bed",
-                                range: "\(profile.temperatures.bedMin)-\(profile.temperatures.bedMax)°C"
                             )
                         }
                     }
@@ -717,54 +708,37 @@ struct LockStatusView: View {
 struct AddFilamentView: View {
     @ObservedObject var database: FilamentDatabase
     @Environment(\.dismiss) var dismiss
-    
-    @State private var brand = ""
-    @State private var selectedBrand = "Anycubic"
-    @State private var useCustomBrand = false
+
     @State private var type: FilamentType = .pla
-    @State private var sku = ""
+    @State private var subtypeId: UInt8 = 0
     @State private var extruderMin = 200
     @State private var extruderMax = 220
-    @State private var bedMin = 50
-    @State private var bedMax = 60
-    
+
     var body: some View {
         NavigationStack {
             Form {
                 Section("Filament Information") {
-                    Toggle("Custom Brand", isOn: $useCustomBrand)
-                    
-                    if useCustomBrand {
-                        TextField("Brand Name", text: $brand)
-                    } else {
-                        Picker("Brand", selection: $selectedBrand) {
-                            ForEach(filamentBrands, id: \.self) { brand in
-                                Text(brand).tag(brand)
-                            }
-                        }
-                    }
-                    
                     Picker("Type", selection: $type) {
                         ForEach(FilamentType.allCases, id: \.self) { type in
                             Text(type.rawValue).tag(type)
                         }
                     }
-                    
-                    TextField("SKU / Serial", text: $sku)
+
+                    Picker("Subtype", selection: $subtypeId) {
+                        ForEach(type.subtypes, id: \.id) { subtype in
+                            Text(subtype.name).tag(subtype.id)
+                        }
+                    }
                 }
-                
+
                 Section("Temperature Settings") {
-                    Stepper("Extruder Min: \(extruderMin)°C", value: $extruderMin, in: 150...300, step: 5)
-                    Stepper("Extruder Max: \(extruderMax)°C", value: $extruderMax, in: 150...300, step: 5)
-                    Stepper("Bed Min: \(bedMin)°C", value: $bedMin, in: 0...120, step: 5)
-                    Stepper("Bed Max: \(bedMax)°C", value: $bedMax, in: 0...120, step: 5)
-                    
+                    Stepper("Extruder Min: \(extruderMin)°C", value: $extruderMin, in: 150...350, step: 5)
+                    Stepper("Extruder Max: \(extruderMax)°C", value: $extruderMax, in: 150...350, step: 5)
+
                     Button("Load Defaults for \(type.rawValue)") {
-                        let temps = TemperatureSettings.defaultTemperatures(for: type)
+                        let temps = TemperatureSettings.defaultTemperatures(for: type, subtypeId: subtypeId)
                         extruderMin = temps.extruderMin
                         extruderMax = temps.extruderMax
-                        bedMin = temps.bedMin
-                        bedMax = temps.bedMax
                     }
                 }
             }
@@ -776,17 +750,14 @@ struct AddFilamentView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add") {
-                        let finalBrand = useCustomBrand ? brand : selectedBrand
+                        let subtypeName = type.subtype(id: subtypeId)?.name ?? type.rawValue
                         let profile = FilamentProfile(
-                            name: "\(finalBrand) \(type.rawValue) \(sku)",
-                            brand: finalBrand,
+                            name: subtypeName,
                             type: type,
-                            sku: sku,
+                            subtypeId: subtypeId,
                             temperatures: TemperatureSettings(
                                 extruderMin: extruderMin,
-                                extruderMax: extruderMax,
-                                bedMin: bedMin,
-                                bedMax: bedMax
+                                extruderMax: extruderMax
                             ),
                             isCustom: true
                         )
@@ -794,15 +765,24 @@ struct AddFilamentView: View {
                         dismiss()
                     }
                     .bold()
-                    .disabled(useCustomBrand && brand.isEmpty)
                 }
             }
-            .onAppear {
-                let temps = TemperatureSettings.defaultTemperatures(for: type)
+            .onChange(of: type) { _, newType in
+                subtypeId = newType.subtypes.first?.id ?? 0
+                let temps = TemperatureSettings.defaultTemperatures(for: newType, subtypeId: subtypeId)
                 extruderMin = temps.extruderMin
                 extruderMax = temps.extruderMax
-                bedMin = temps.bedMin
-                bedMax = temps.bedMax
+            }
+            .onChange(of: subtypeId) { _, newSubtypeId in
+                let temps = TemperatureSettings.defaultTemperatures(for: type, subtypeId: newSubtypeId)
+                extruderMin = temps.extruderMin
+                extruderMax = temps.extruderMax
+            }
+            .onAppear {
+                subtypeId = type.subtypes.first?.id ?? 0
+                let temps = TemperatureSettings.defaultTemperatures(for: type, subtypeId: subtypeId)
+                extruderMin = temps.extruderMin
+                extruderMax = temps.extruderMax
             }
         }
     }
@@ -812,33 +792,32 @@ struct EditFilamentView: View {
     @ObservedObject var database: FilamentDatabase
     let profile: FilamentProfile
     @Environment(\.dismiss) var dismiss
-    
-    @State private var brand = ""
+
     @State private var type: FilamentType = .pla
-    @State private var sku = ""
+    @State private var subtypeId: UInt8 = 0
     @State private var extruderMin = 200
     @State private var extruderMax = 220
-    @State private var bedMin = 50
-    @State private var bedMax = 60
-    
+
     var body: some View {
         NavigationStack {
             Form {
                 Section("Filament Information") {
-                    TextField("Brand Name", text: $brand)
                     Picker("Type", selection: $type) {
                         ForEach(FilamentType.allCases, id: \.self) { type in
                             Text(type.rawValue).tag(type)
                         }
                     }
-                    TextField("SKU / Serial", text: $sku)
+
+                    Picker("Subtype", selection: $subtypeId) {
+                        ForEach(type.subtypes, id: \.id) { subtype in
+                            Text(subtype.name).tag(subtype.id)
+                        }
+                    }
                 }
-                
+
                 Section("Temperature Settings") {
-                    Stepper("Extruder Min: \(extruderMin)°C", value: $extruderMin, in: 150...300, step: 5)
-                    Stepper("Extruder Max: \(extruderMax)°C", value: $extruderMax, in: 150...300, step: 5)
-                    Stepper("Bed Min: \(bedMin)°C", value: $bedMin, in: 0...120, step: 5)
-                    Stepper("Bed Max: \(bedMax)°C", value: $bedMax, in: 0...120, step: 5)
+                    Stepper("Extruder Min: \(extruderMin)°C", value: $extruderMin, in: 150...350, step: 5)
+                    Stepper("Extruder Max: \(extruderMax)°C", value: $extruderMax, in: 150...350, step: 5)
                 }
             }
             .navigationTitle("Edit Filament")
@@ -850,31 +829,27 @@ struct EditFilamentView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         var updatedProfile = profile
-                        updatedProfile.brand = brand
                         updatedProfile.type = type
-                        updatedProfile.sku = sku
-                        updatedProfile.name = "\(brand) \(type.rawValue) \(sku)"
+                        updatedProfile.subtypeId = subtypeId
+                        updatedProfile.name = type.subtype(id: subtypeId)?.name ?? type.rawValue
                         updatedProfile.temperatures = TemperatureSettings(
                             extruderMin: extruderMin,
-                            extruderMax: extruderMax,
-                            bedMin: bedMin,
-                            bedMax: bedMax
+                            extruderMax: extruderMax
                         )
                         database.updateProfile(updatedProfile)
                         dismiss()
                     }
                     .bold()
-                    .disabled(brand.isEmpty)
                 }
             }
+            .onChange(of: type) { _, newType in
+                subtypeId = newType.subtype(id: subtypeId) != nil ? subtypeId : (newType.subtypes.first?.id ?? 0)
+            }
             .onAppear {
-                brand = profile.brand
                 type = profile.type
-                sku = profile.sku
+                subtypeId = profile.subtypeId
                 extruderMin = profile.temperatures.extruderMin
                 extruderMax = profile.temperatures.extruderMax
-                bedMin = profile.temperatures.bedMin
-                bedMax = profile.temperatures.bedMax
             }
         }
     }
