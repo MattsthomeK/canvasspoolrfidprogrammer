@@ -71,7 +71,7 @@ struct ContentView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("Canvas RFID")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -626,7 +626,7 @@ struct FooterView: View {
                     .font(.caption)
                     .fontWeight(.semibold)
 
-                Text("Programs NTAG213/215/216 tags for Elegoo Canvas filament spools")
+                Text("Write NFC tags to identify filament spools with the Elegoo Canvas RFID system")
                     .font(.caption2)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
