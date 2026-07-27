@@ -32,9 +32,14 @@ struct AboutView: View {
                                 )
                             )
                         
-                        Text("Spool Programmer")
+                        Text("Canvas Spool Programmer")
                             .font(.title.bold())
-                        
+
+                        Text("Programs NTAG213/215/216 tags for Elegoo Canvas filament spools")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+
                         Text("Version \(appVersion)")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
@@ -113,13 +118,7 @@ struct AboutView: View {
                             systemImage: "chevron.left.forwardslash.chevron.right",
                             url: "https://github.com/martinbogo/rfidspoolprogrammer"
                         )
-                        
-                        LinkButton(
-                            title: "ACE-RFID Project",
-                            systemImage: "antenna.radiowaves.left.and.right",
-                            url: "https://github.com/AceCentre/ACE-RFID"
-                        )
-                        
+
                         LinkButton(
                             title: "Privacy Policy",
                             systemImage: "hand.raised.fill",
@@ -134,16 +133,19 @@ struct AboutView: View {
                     }
                     .padding(.horizontal)
                     
-                    // Footer
+                    // Credits
                     VStack(spacing: 8) {
-                        Text("Made with ❤️ for the 3D printing community")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        
-                        Text("© 2024-2025 Martin Bogo")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+                        Link(destination: URL(string: "https://github.com/martinbogo/rfidspoolprogrammer")!) {
+                            Text("Based on Spool Programmer by martinbogo")
+                                .font(.caption)
+                        }
+
+                        Link(destination: URL(string: "https://github.com/DnG-Crafts/ELG-RFID")!) {
+                            Text("Elegoo format by DnG-Crafts")
+                                .font(.caption)
+                        }
                     }
+                    .foregroundColor(.secondary)
                     .padding(.vertical, 20)
                 }
                 .padding(.vertical)

@@ -70,7 +70,7 @@ struct ContentView: View {
                 .padding(.vertical)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("RFID Spool Programmer")
+            .navigationTitle("Canvas Spool Programmer")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -622,33 +622,30 @@ struct FooterView: View {
         VStack(spacing: 16) {
             // App info
             VStack(spacing: 8) {
-                Text("Spool Programmer")
+                Text("Canvas Spool Programmer")
                     .font(.caption)
                     .fontWeight(.semibold)
-                
-                Text("Programs NTAG213/215/216 tags for 3D printer filament spools")
+
+                Text("Programs NTAG213/215/216 tags for Elegoo Canvas filament spools")
                     .font(.caption2)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
-                
-                Text("Based on ACE-RFID by DnG-Crafts")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
             }
             .padding(.top, 8)
-            
-            // GitHub Link
-            Link(destination: URL(string: "https://github.com/martinbogo/rfidspoolprogrammer")!) {
-                HStack(spacing: 6) {
-                    Text("Fueled by Caffeine, Powered by GitHub")
-                        .font(.caption2)
-                    
-                    Image(systemName: "arrow.up.right.square")
+
+            // Credits
+            VStack(spacing: 4) {
+                Link(destination: URL(string: "https://github.com/martinbogo/rfidspoolprogrammer")!) {
+                    Text("Based on Spool Programmer by martinbogo")
                         .font(.caption2)
                 }
-                .foregroundColor(.secondary)
-                .padding(.vertical, 8)
+
+                Link(destination: URL(string: "https://github.com/DnG-Crafts/ELG-RFID")!) {
+                    Text("Elegoo format by DnG-Crafts")
+                        .font(.caption2)
+                }
             }
+            .foregroundColor(.secondary)
         }
         .padding(.horizontal)
         .padding(.bottom, 20)
