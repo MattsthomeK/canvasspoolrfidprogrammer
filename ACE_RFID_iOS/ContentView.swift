@@ -105,7 +105,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingEditFilament) {
                 if let profile = selectedProfile {
-                    EditFilamentView(database: filamentDB, profile: profile)
+                    EditFilamentView(database: filamentDB, profile: profile) { updatedProfile in
+                        selectedProfile = updatedProfile
+                    }
                 }
             }
             .sheet(isPresented: $showingLockStatus) {
@@ -788,6 +790,7 @@ struct AddFilamentView: View {
 struct EditFilamentView: View {
     @ObservedObject var database: FilamentDatabase
     let profile: FilamentProfile
+    var onSave: (FilamentProfile) -> Void = { _ in }
     @Environment(\.dismiss) var dismiss
 
     @State private var type: FilamentType = .pla
@@ -834,13 +837,25 @@ struct EditFilamentView: View {
                             extruderMax: extruderMax
                         )
                         database.updateProfile(updatedProfile)
+                        onSave(updatedProfile)
                         dismiss()
                     }
                     .bold()
                 }
             }
             .onChange(of: type) { _, newType in
-                subtypeId = newType.subtype(id: subtypeId) != nil ? subtypeId : (newType.subtypes.first?.id ?? 0)
+                let newSubtypeId = newType.subtype(id: subtypeId)?.id ?? (newType.subtypes.first?.id ?? 0)
+                subtypeId = newSubtypeId
+                if let subtype = newType.subtype(id: newSubtypeId) {
+                    extruderMin = subtype.extruderMin
+                    extruderMax = subtype.extruderMax
+                }
+            }
+            .onChange(of: subtypeId) { _, newSubtypeId in
+                if let subtype = type.subtype(id: newSubtypeId) {
+                    extruderMin = subtype.extruderMin
+                    extruderMax = subtype.extruderMax
+                }
             }
             .onAppear {
                 type = profile.type
