@@ -1,12 +1,16 @@
-# App Store Submission Guide - Version 1.2.0
+# App Store Submission Guide - Version 1.2.1
 
 ## Current Version Info
-- **Marketing Version:** 1.2.0
-- **Build Number:** 3
-- **Bundle ID:** com.martinbogo.spoolprogrammer
-- **App Name:** Spool Programmer (Display: ACE Spool RFID Programmer)
+- **Marketing Version:** 1.2.1
+- **Build Number:** 4
+- **Bundle ID:** com.mattsthomek.canvasspoolprogrammer
+- **App Name:** Spool Programmer (Display: Canvas RFID)
 - **Deployment Target:** iOS 18.0
 - **Swift Version:** 5.0
+
+## Status: Testing / Setup Phase
+
+This app has **not yet been submitted to the App Store**. No archive has been uploaded to App Store Connect. This document is the runbook for when that's ready.
 
 ## ✅ Pre-Submission Checklist
 
@@ -14,26 +18,28 @@
 - ✅ All files committed to git
 - ✅ No compilation errors
 - ✅ BUILD SUCCEEDED
-- ✅ 5 commits ready to push to origin/main
+- ✅ Pushed to origin/main
 
 ### 2. Version Numbers
-- ✅ Version 1.1.0 (MINOR bump for new features)
-- ✅ Build 2 (incremented from previous)
+- ✅ Version 1.2.1 (PATCH bump)
+- ✅ Build 4 (incremented from previous)
 
-### 3. Features in This Release
-- ✅ Fixed NFC scanning failures on iOS 26
-- ✅ Broadened tag polling (ISO 14443 + ISO 15693)
-- ✅ Added NDEF entitlement for full NFC access
-- ✅ Improved session recovery (restartPolling on failure)
-- ✅ Better error messages and timeout guidance
-- ✅ Replaced deprecated NavigationView with NavigationStack
-- ✅ Deployment target raised to iOS 18.0
+### 3. Outstanding Before Submission
+- [ ] App Store Connect record created for this bundle ID (if not already)
+- [ ] Additional screenshots captured (only `screenshots/01_main_screen.png` exists; need 3-5 covering main screen, color picker, Settings, About, tag details)
+- [ ] App Privacy / Nutrition Label questionnaire completed in App Store Connect
+- [ ] Age rating questionnaire completed
+- [ ] Export compliance answered (app does not use custom encryption — answer "No")
+- [ ] App description, keywords, support URL, marketing URL entered
+- [ ] Pricing and availability set
+- [ ] Apple Developer Program membership confirmed active (required for Automatic signing / archiving)
+- [ ] TestFlight pass on a physical device with real NTAG213/215/216 tags (NFC cannot be tested in Simulator)
 
 ## 🚀 Step-by-Step Submission Process
 
 ### Step 1: Push to GitHub
 ```bash
-cd /Users/martin/Development/rfidspoolprogrammer
+cd /Users/mattst/Developer/canvasspoolrfidprogrammer
 git push origin main
 ```
 
@@ -57,7 +63,7 @@ git push origin main
 
 In the Organizer window (after archive completes):
 
-1. **Select your archive** (should show version 1.2.0, build 3)
+1. **Select your archive** (should show version 1.2.1, build 4)
 
 2. **Click "Validate App"**
    - Choose your Apple ID/Team
@@ -117,7 +123,7 @@ In the Organizer window (after archive completes):
 
 3. **Check Build Status:**
    - Click "TestFlight" tab or "App Store" tab
-   - Look for build 2
+   - Look for build 4
    - Status will show: "Processing" (10-30 minutes)
    - Email notification when processing complete
 
@@ -127,37 +133,28 @@ In the Organizer window (after archive completes):
 
 1. **In App Store Connect → App Store tab:**
    - Click the "+" button next to "iOS App"
-   - Enter version: **1.2.0**
+   - Enter version: **1.2.1**
 
 2. **Fill Required Fields:**
 
    **What's New in This Version:**
    ```
-   Version 1.2.0 - iOS 26 Compatibility Update
+   Version 1.2.1
 
-   Bug Fixes:
-   • Fixed NFC tag scanning failures on iOS 26
-   • Improved tag detection reliability with broader protocol support
-   • Better session recovery when connection is interrupted
-
-   Improvements:
-   • Added ISO 15693 protocol support for wider tag compatibility
-   • Clearer error messages when tags cannot be read
-   • Helpful positioning tips when scans time out
-   • Updated UI framework for modern iOS
-
-   Requirements:
-   • Now requires iOS 18.0 or later
+   • Renamed to Canvas RFID
+   • Minor fixes and polish
    ```
 
    **Promotional Text (Optional):**
    ```
-   Updated for iOS 26! Version 1.2.0 fixes NFC scanning issues and improves tag detection reliability for programming 3D printer filament spool RFID tags.
+   Canvas RFID programs NTAG213/215/216 tags for Elegoo Canvas
+   filament spools — read, write, and verify spool data right
+   from your iPhone.
    ```
 
 3. **Select Your Build:**
    - Under "Build" section, click the "+" button
-   - Select build 3
+   - Select build 4
    - Click "Done"
 
 4. **Review Other Sections:**
@@ -202,10 +199,6 @@ In the Organizer window (after archive completes):
    NTAG213/215/216 NFC tags to test fully. The app reads and 
    writes filament spool information to NFC tags for 3D printing.
 
-   Version 1.2.0 fixes NFC scanning failures reported on iOS 26.
-   Changes include broader NFC protocol polling and improved 
-   session recovery. No new permissions or features beyond NFC.
-
    Key features to test:
    • Main screen UI layout and navigation
    • Settings screen - customization options  
@@ -226,13 +219,13 @@ In the Organizer window (after archive completes):
   - "Pending Developer Release" → Approved! Ready to publish
   - "Ready for Sale" → Live on App Store
 
-## 📱 TestFlight (Optional but Recommended)
+## 📱 TestFlight (Recommended Before First Submission)
 
 **Before submitting to App Store, test with TestFlight:**
 
 1. **In App Store Connect → TestFlight tab:**
-   - Build 3 should appear after processing
-   - Click on build 3
+   - Build 4 should appear after processing
+   - Click on build 4
 
 2. **Add Internal Testers:**
    - Click "Internal Testing"
@@ -246,7 +239,7 @@ In the Organizer window (after archive completes):
 
 4. **Test Thoroughly:**
    - Install via TestFlight on physical device
-   - Verify NFC scanning works on iOS 26
+   - Verify NFC scanning works
    - Test tag read/write with NTAG213/215/216
    - Check Settings persistence
    - Verify haptic feedback toggle
@@ -254,7 +247,7 @@ In the Organizer window (after archive completes):
 
 5. **Fix Any Issues:**
    - If bugs found, fix them
-   - Increment build number to 4
+   - Increment build number
    - Archive and upload again
    - TestFlight testers get automatic update
 
@@ -304,6 +297,8 @@ grep -E "(MARKETING_VERSION|CURRENT_PROJECT_VERSION)" ACE_RFID_iOS.xcodeproj/pro
 
 - **1.0.1 (build 1):** Initial release with core NFC functionality
 - **1.1.0 (build 2):** Added Settings Screen and Tag Details Display
+- **1.2.0 (build 3):** iOS 26 NFC scanning fixes, broader tag protocol support, NavigationStack migration
+- **1.2.1 (build 4):** Renamed to Canvas RFID (Home Screen name + About screen)
 
 ## 🔄 After Approval
 
@@ -318,21 +313,20 @@ grep -E "(MARKETING_VERSION|CURRENT_PROJECT_VERSION)" ACE_RFID_iOS.xcodeproj/pro
    - Read user reviews
 
 3. **Plan Next Update:**
-   - Version 1.1.1 for bug fixes
-   - Version 1.2.0 for VoiceOver labels + temperature warnings
-   - Version 2.0.0 for major redesign (Widget support?)
+   - VoiceOver labels + temperature warnings
+   - Widget support?
 
 ## ✅ Current Status
 
 - [x] Code complete
-- [x] Version set to 1.1.0 (build 2)
+- [x] Version set to 1.2.1 (build 4)
 - [x] All commits in git
-- [ ] Pushed to GitHub (run: `git push origin main`)
+- [x] Pushed to GitHub
+- [ ] App Store Connect record created
+- [ ] Additional screenshots captured
+- [ ] TestFlight internal testing pass
 - [ ] Archived in Xcode
 - [ ] Uploaded to App Store Connect
 - [ ] Submitted for review
 
-**Next Command:** `git push origin main`
-**Then:** Open Xcode and archive!
-
-Good luck! 🚀
+**Next Step:** Capture remaining screenshots, then archive in Xcode and validate.

@@ -307,7 +307,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ACE_RFID_iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ACE Spool RFID Programmer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSNFCReaderUsageDescription = "This app needs NFC access to read and write RFID tags for filament spool programming.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -342,7 +341,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ACE_RFID_iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "ACE Spool RFID Programmer";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSNFCReaderUsageDescription = "This app needs NFC access to read and write RFID tags for filament spool programming.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
