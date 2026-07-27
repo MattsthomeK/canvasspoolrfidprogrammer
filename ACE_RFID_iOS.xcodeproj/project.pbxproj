@@ -302,7 +302,7 @@
 				CODE_SIGN_ENTITLEMENTS = ACE_RFID_iOS/ACE_RFID_iOS.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = RXX3MVVLWC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -319,7 +319,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattsthomek.canvasspoolprogrammer;
 				PRODUCT_NAME = SpoolProgrammer;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -337,7 +337,7 @@
 				CODE_SIGN_ENTITLEMENTS = ACE_RFID_iOS/ACE_RFID_iOS.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = RXX3MVVLWC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -354,7 +354,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattsthomek.canvasspoolprogrammer;
 				PRODUCT_NAME = SpoolProgrammer;
 				PROVISIONING_PROFILE_SPECIFIER = "";
