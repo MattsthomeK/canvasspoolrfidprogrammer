@@ -32,7 +32,7 @@ struct AboutView: View {
                                 )
                             )
                         
-                        Text("Canvas Spool Programmer")
+                        Text("Canvas RFID")
                             .font(.title.bold())
 
                         Text("Programs NTAG213/215/216 tags for Elegoo Canvas filament spools")
