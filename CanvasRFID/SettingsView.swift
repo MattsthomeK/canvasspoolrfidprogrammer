@@ -47,8 +47,7 @@ struct SettingsView: View {
                 
                 // Reset Section
                 Section(footer: Text("""
-Resets NFC and display preferences only:
-- Auto-Verify After Write → On
+• Auto-Verify After Write → On
 - Haptic Feedback → On
 - Show Debug Information → Off
 - Default Spool Size → 1 kg
@@ -59,7 +58,7 @@ Resets NFC and display preferences only:
                     } label: {
                         HStack {
                             Image(systemName: "arrow.counterclockwise")
-                            Text("Reset All Settings to Defaults")
+                            Text("Reset NFC and Display Preferences")
                         }
                     }
                 }
