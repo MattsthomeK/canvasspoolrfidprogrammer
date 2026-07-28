@@ -669,7 +669,7 @@ extension NFCManager: NFCTagReaderSessionDelegate {
         self.dataToVerify = bytes
         
         // Keep the session alive with informative message
-        session.alertMessage = "Keep iPhone near tag - Writing data..."
+        session.alertMessage = "Hold still — writing data... (about 3 seconds)"
         
         // Try writing directly without format first
         writeAllPages(tag: tag, data: bytes) { success in
@@ -682,7 +682,7 @@ extension NFCManager: NFCTagReaderSessionDelegate {
                 
                 // Check if auto-verify is enabled
                 if AppSettings.shared.autoVerifyEnabled {
-                    session.alertMessage = "Verifying write..."
+                    session.alertMessage = "Verifying... keep holding"
                     self.performVerifyWrite(tag: tag, session: session)
                 } else {
                     // Just close the session without verify
@@ -848,7 +848,7 @@ extension NFCManager: NFCTagReaderSessionDelegate {
                     self.statusMessage = "✅ Write verified successfully - Data is correct!"
                     self.playSuccessHaptic()
                 }
-                session.alertMessage = "✅ Verified! Data written correctly."
+                session.alertMessage = "✅ Done! Tag programmed successfully."
             } else {
                 debugLog("❌ VERIFICATION FAILED: \(mismatchCount) byte mismatches")
                 if let first = firstMismatch {
