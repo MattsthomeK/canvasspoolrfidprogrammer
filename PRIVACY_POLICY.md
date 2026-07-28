@@ -1,14 +1,14 @@
-# Privacy Policy for Spool Programmer
+# Privacy Policy for Canvas RFID
 
-**Last Updated:** October 1, 2025
+**Last Updated:** July 27, 2026
 
 ## Overview
 
-Spool Programmer is committed to protecting your privacy. This privacy policy explains our approach to data collection and use.
+Canvas RFID is committed to protecting your privacy. This privacy policy explains our approach to data collection and use.
 
 ## No Data Collection
 
-**Spool Programmer does not collect, store, transmit, or share any personal information or usage data. Period.**
+**Canvas RFID does not collect, store, transmit, or share any personal information or usage data. Period.**
 
 ### What This Means:
 - ✅ No account creation or login required
@@ -41,7 +41,7 @@ When you write data to an NFC tag, that data is written directly from your iPhon
 
 ## Third-Party Services
 
-Spool Programmer does not integrate with any third-party services, analytics platforms, advertising networks, or data brokers. There are no embedded SDKs that track your behavior.
+Canvas RFID does not integrate with any third-party services, analytics platforms, advertising networks, or data brokers. There are no embedded SDKs that track your behavior.
 
 ## App Permissions
 
@@ -51,12 +51,11 @@ The app requests only the permissions necessary for its core functionality:
 
 ## Children's Privacy
 
-Spool Programmer does not knowingly collect data from anyone, including children under 13. Since we collect no data at all, the app is safe for users of all ages.
+Canvas RFID does not knowingly collect data from anyone, including children under 13. Since we collect no data at all, the app is safe for users of all ages.
 
 ## Open Source
 
-Spool Programmer is based on the open-source ACE-RFID project. You can review the source code at:  
-**https://github.com/martinbogo/rfidspoolprogrammer**
+Canvas RFID is open source. You can review the source code at: https://github.com/MattsthomeK/canvasspoolrfidprogrammer — which is forked from martinbogo's rfidspoolprogrammer (MIT license).
 
 ## Changes to This Policy
 
@@ -64,9 +63,7 @@ If we ever change our approach to privacy (which we don't plan to), we will upda
 
 ## Contact
 
-If you have questions about this privacy policy, please contact:
-- **GitHub:** https://github.com/martinbogo/rfidspoolprogrammer/issues
-- **Email:** [Your email if you want to provide one]
+If you have questions about this privacy policy, please open an issue at https://github.com/MattsthomeK/canvasspoolrfidprogrammer/issues or contact via the App Store.
 
 ## Your Rights
 
@@ -82,4 +79,4 @@ Since we don't collect any data about you:
 
 ## Summary
 
-Spool Programmer respects your privacy by simply not collecting any information about you. Your data is yours, and it stays on your device. We believe this is how software should work.
+Canvas RFID respects your privacy by simply not collecting any information about you. Your data is yours, and it stays on your device. We believe this is how software should work.

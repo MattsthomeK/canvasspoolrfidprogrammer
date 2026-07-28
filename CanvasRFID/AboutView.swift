@@ -116,19 +116,19 @@ struct AboutView: View {
                         LinkButton(
                             title: "GitHub Repository",
                             systemImage: "chevron.left.forwardslash.chevron.right",
-                            url: "https://github.com/martinbogo/rfidspoolprogrammer"
+                            url: "https://github.com/MattsthomeK/canvasspoolrfidprogrammer"
                         )
 
                         LinkButton(
                             title: "Privacy Policy",
                             systemImage: "hand.raised.fill",
-                            url: "https://github.com/martinbogo/rfidspoolprogrammer/blob/main/PRIVACY_POLICY.md"
+                            url: "https://github.com/MattsthomeK/canvasspoolrfidprogrammer/blob/main/PRIVACY_POLICY.md"
                         )
                         
                         LinkButton(
                             title: "Report Issue",
                             systemImage: "exclamationmark.bubble.fill",
-                            url: "https://github.com/martinbogo/rfidspoolprogrammer/issues"
+                            url: "https://github.com/MattsthomeK/canvasspoolrfidprogrammer/issues"
                         )
                     }
                     .padding(.horizontal)
@@ -136,7 +136,7 @@ struct AboutView: View {
                     // Credits
                     VStack(spacing: 8) {
                         Link(destination: URL(string: "https://github.com/martinbogo/rfidspoolprogrammer")!) {
-                            Text("Based on Spool Programmer by martinbogo")
+                            Text("Based on ACE Spool Programmer by martinbogo (Anycubic ACE format)")
                                 .font(.caption)
                         }
 

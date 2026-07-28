@@ -634,20 +634,6 @@ struct FooterView: View {
                     .multilineTextAlignment(.center)
             }
             .padding(.top, 8)
-
-            // Credits
-            VStack(spacing: 4) {
-                Link(destination: URL(string: "https://github.com/martinbogo/rfidspoolprogrammer")!) {
-                    Text("Based on Spool Programmer by martinbogo")
-                        .font(.caption2)
-                }
-
-                Link(destination: URL(string: "https://github.com/DnG-Crafts/ELG-RFID")!) {
-                    Text("Elegoo format by DnG-Crafts")
-                        .font(.caption2)
-                }
-            }
-            .foregroundColor(.secondary)
         }
         .padding(.horizontal)
         .padding(.bottom, 20)
