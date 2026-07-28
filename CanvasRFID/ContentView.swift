@@ -40,18 +40,12 @@ struct ContentView: View {
                             selectedProfile: $selectedProfile,
                             filamentDB: filamentDB,
                             showingAddFilament: $showingAddFilament,
-                            showingEditFilament: $showingEditFilament
+                            showingEditFilament: $showingEditFilament,
+                            selectedColor: $selectedColor,
+                            selectedSpoolSize: $selectedSpoolSize,
+                            showingColorPicker: $showingColorPicker
                         )
-                        
-                        // Spool Configuration Card
-                        if selectedProfile != nil {
-                            SpoolConfigCard(
-                                selectedColor: $selectedColor,
-                                selectedSpoolSize: $selectedSpoolSize,
-                                showingColorPicker: $showingColorPicker
-                            )
-                        }
-                        
+
                         // Action Buttons
                         ActionButtonsCard(
                             nfcManager: nfcManager,
@@ -101,7 +95,7 @@ struct ContentView: View {
                 ColorPickerView(selectedColor: $selectedColor)
             }
             .sheet(isPresented: $showingAddFilament) {
-                AddFilamentView(database: filamentDB)
+                AddFilamentView(database: filamentDB, onProfileAdded: { newProfile in selectedProfile = newProfile })
             }
             .sheet(isPresented: $showingEditFilament) {
                 if let profile = selectedProfile {
@@ -278,22 +272,19 @@ struct FilamentSelectionCard: View {
     @ObservedObject var filamentDB: FilamentDatabase
     @Binding var showingAddFilament: Bool
     @Binding var showingEditFilament: Bool
-    
+    @Binding var selectedColor: Color
+    @Binding var selectedSpoolSize: SpoolSize
+    @Binding var showingColorPicker: Bool
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Label("Filament Profile", systemImage: "cube.fill")
-                    .font(.headline)
-                Spacer()
-                Button(action: { showingAddFilament = true }) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title3)
-                        .foregroundStyle(.blue)
-                }
-            }
-            
             // Profile Picker
             Menu {
+                Button(action: { showingAddFilament = true }) {
+                    Label("Add Filament Profile…", systemImage: "plus")
+                }
+                Divider()
+
                 ForEach(filamentDB.profiles) { profile in
                     Button(action: { 
                         withAnimation(.spring(response: 0.3)) {
@@ -310,7 +301,7 @@ struct FilamentSelectionCard: View {
                 }
             } label: {
                 HStack {
-                    Text(selectedProfile?.displayName ?? "Select Material")
+                    Text(selectedProfile?.displayName ?? "Choose a profile to write...")
                         .foregroundColor(selectedProfile == nil ? .secondary : .primary)
                     Spacer()
                     Image(systemName: "chevron.up.chevron.down")
@@ -368,107 +359,91 @@ struct FilamentSelectionCard: View {
                         }
                         .buttonStyle(.bordered)
                     }
-                }
-            }
-        }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color(.systemBackground))
-        )
-    }
-}
 
-// MARK: - Spool Configuration Card
+                    Divider()
 
-struct SpoolConfigCard: View {
-    @Binding var selectedColor: Color
-    @Binding var selectedSpoolSize: SpoolSize
-    @Binding var showingColorPicker: Bool
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Label("Spool Settings", systemImage: "gearshape.fill")
-                .font(.headline)
-            
-            // Color and Spool Size Side by Side
-            HStack(spacing: 12) {
-                // Color Picker
-                Button(action: { showingColorPicker = true }) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "paintpalette")
-                                .font(.caption)
-                            Text("Color")
-                                .font(.subheadline)
-                        }
-                        .foregroundColor(.secondary)
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(selectedColor)
-                            .frame(height: 50)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
-                            )
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(.secondarySystemGroupedBackground))
-                    )
-                }
-                .buttonStyle(.plain)
-                
-                // Spool Size Picker
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "scalemass")
-                            .font(.caption)
-                        Text("Spool Size")
-                            .font(.subheadline)
-                    }
-                    .foregroundColor(.secondary)
-                    
-                    Menu {
-                        ForEach(SpoolSize.allCases, id: \.self) { size in
-                            Button(action: {
-                                withAnimation(.spring(response: 0.2)) {
-                                    selectedSpoolSize = size
+                    Label("Spool Settings", systemImage: "gearshape.fill")
+                        .font(.headline)
+
+                    HStack(spacing: 12) {
+                        // Color Picker
+                        Button(action: { showingColorPicker = true }) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack(spacing: 6) {
+                                    Image(systemName: "paintpalette")
+                                        .font(.caption)
+                                    Text("Color")
+                                        .font(.subheadline)
                                 }
-                            }) {
-                                HStack {
-                                    Text(size.rawValue)
-                                    if selectedSpoolSize == size {
-                                        Image(systemName: "checkmark")
+                                .foregroundColor(.secondary)
+
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(selectedColor)
+                                    .frame(height: 50)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
+                                    )
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color(.secondarySystemGroupedBackground))
+                            )
+                        }
+                        .buttonStyle(.plain)
+
+                        // Spool Size Picker
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "scalemass")
+                                    .font(.caption)
+                                Text("Spool Size")
+                                    .font(.subheadline)
+                            }
+                            .foregroundColor(.secondary)
+
+                            Menu {
+                                ForEach(SpoolSize.allCases, id: \.self) { size in
+                                    Button(action: {
+                                        withAnimation(.spring(response: 0.2)) {
+                                            selectedSpoolSize = size
+                                        }
+                                    }) {
+                                        HStack {
+                                            Text(size.rawValue)
+                                            if selectedSpoolSize == size {
+                                                Image(systemName: "checkmark")
+                                            }
+                                        }
                                     }
                                 }
+                            } label: {
+                                HStack {
+                                    Text(selectedSpoolSize.rawValue)
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                    Image(systemName: "chevron.up.chevron.down")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                .frame(height: 50)
+                                .padding(.horizontal, 12)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color(.tertiarySystemGroupedBackground))
+                                )
                             }
                         }
-                    } label: {
-                        HStack {
-                            Text(selectedSpoolSize.rawValue)
-                                .foregroundColor(.primary)
-                            Spacer()
-                            Image(systemName: "chevron.up.chevron.down")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                        .frame(height: 50)
-                        .padding(.horizontal, 12)
+                        .frame(maxWidth: .infinity)
+                        .padding(12)
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(.tertiarySystemGroupedBackground))
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemGroupedBackground))
                         )
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(12)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color(.secondarySystemGroupedBackground))
-                )
             }
         }
         .padding()
@@ -649,11 +624,10 @@ struct FooterView: View {
             // App info
             VStack(spacing: 8) {
                 Text("Canvas Spool Programmer")
-                    .font(.caption)
-                    .fontWeight(.semibold)
+                    .font(.system(size: 15, weight: .semibold))
 
                 Text("Write NFC tags to identify filament spools with the Elegoo Canvas RFID system")
-                    .font(.caption2)
+                    .font(.system(size: 14))
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
             }
@@ -717,6 +691,7 @@ struct LockStatusView: View {
 struct AddFilamentView: View {
     @ObservedObject var database: FilamentDatabase
     @Environment(\.dismiss) var dismiss
+    var onProfileAdded: ((FilamentProfile) -> Void)? = nil
 
     @State private var type: FilamentType = .pla
     @State private var subtypeId: UInt8 = 0
@@ -771,6 +746,7 @@ struct AddFilamentView: View {
                             isCustom: true
                         )
                         database.addProfile(profile)
+                        onProfileAdded?(profile)
                         dismiss()
                     }
                     .bold()

@@ -135,15 +135,11 @@ struct AboutView: View {
                     
                     // Credits
                     VStack(spacing: 8) {
-                        Link(destination: URL(string: "https://github.com/martinbogo/rfidspoolprogrammer")!) {
-                            Text("Based on ACE Spool Programmer by martinbogo (Anycubic ACE format)")
-                                .font(.caption)
-                        }
+                        Text("Based on ACE Spool Programmer by martinbogo (Anycubic ACE format)")
+                            .font(.caption)
 
-                        Link(destination: URL(string: "https://github.com/DnG-Crafts/ELG-RFID")!) {
-                            Text("Elegoo format by DnG-Crafts")
-                                .font(.caption)
-                        }
+                        Text("Elegoo format by DnG-Crafts")
+                            .font(.caption)
                     }
                     .foregroundColor(.secondary)
                     .padding(.vertical, 20)
