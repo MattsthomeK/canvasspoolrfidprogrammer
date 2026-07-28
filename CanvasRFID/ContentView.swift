@@ -151,6 +151,25 @@ struct ContentView: View {
                     )
                     currentTagDetails = tagDetails
                     showingTagDetails = true
+                } else if let bytes = newBytes {
+                    // Blank or unrecognized tag - still show Tag Details
+                    let memoryUsed = bytes.count
+                    let tagDetails = TagDetails(
+                        uid: nfcManager.tagUID,
+                        tagType: nfcManager.tagType.isEmpty ? "NTAG215" : nfcManager.tagType,
+                        memoryUsed: memoryUsed,
+                        memoryTotal: 504,
+                        readDate: Date(),
+                        hasData: false,
+                        dataType: nil,
+                        filamentType: nil,
+                        filamentSubtype: nil,
+                        extruderMin: nil,
+                        extruderMax: nil,
+                        filamentColor: nil
+                    )
+                    currentTagDetails = tagDetails
+                    showingTagDetails = true
                 }
             }
         }
