@@ -801,13 +801,28 @@ extension NFCManager: NFCTagReaderSessionDelegate {
     
     private func performLockCheck(tag: NFCMiFareTag, session: NFCTagReaderSession) {
         checkLockBytes(tag: tag) { lockStatus in
-            DispatchQueue.main.async {
-                self.tagLockStatus = lockStatus
-                self.statusMessage = "Lock status checked"
+            self.readPages(tag: tag, startPage: 0, count: 45) { readBytes in
+                var finalStatus = lockStatus
+                if let readBytes = readBytes {
+                    finalStatus += "\n\nRaw Tag Dump:\nPage | B0  B1  B2  B3\n-----|----------------"
+                    for page in 0..<45 {
+                        let offset = page * 4
+                        guard offset + 3 < readBytes.count else { break }
+                        let b0 = readBytes[offset]
+                        let b1 = readBytes[offset + 1]
+                        let b2 = readBytes[offset + 2]
+                        let b3 = readBytes[offset + 3]
+                        finalStatus += "\n  \(String(format: "%02d", page)) | \(String(format: "%02X", b0)) \(String(format: "%02X", b1)) \(String(format: "%02X", b2)) \(String(format: "%02X", b3))"
+                    }
+                }
+                DispatchQueue.main.async {
+                    self.tagLockStatus = finalStatus
+                    self.statusMessage = "Lock status checked"
+                }
+                debugLog(finalStatus)
+                session.alertMessage = "Lock status retrieved"
+                session.invalidate()
             }
-            debugLog(lockStatus)
-            session.alertMessage = "Lock status retrieved"
-            session.invalidate()
         }
     }
     
