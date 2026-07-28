@@ -849,7 +849,7 @@ extension NFCManager: NFCTagReaderSessionDelegate {
             if mismatchCount == 0 {
                 debugLog("✅ VERIFICATION SUCCESS: All \(bytesToCompare) bytes match!")
                 DispatchQueue.main.async {
-                    self.statusMessage = "✅ Write verified successfully - Data is correct!"
+                    self.statusMessage = "Write verified successfully - Data is correct!"
                     self.playSuccessHaptic()
                 }
                 session.alertMessage = "✅ Done! Tag programmed successfully."
