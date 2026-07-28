@@ -102,7 +102,7 @@ struct TagDetailsView: View {
                             HStack {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundColor(.green)
-                                Text("Contains \(dataType) data")
+                                Text(dataType)
                                     .font(.subheadline)
                             }
                         } else {

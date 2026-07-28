@@ -142,7 +142,7 @@ struct ContentView: View {
                         memoryTotal: 504,
                         readDate: Date(),
                         hasData: true,
-                        dataType: "Filament: \(tagData.profile.name)",
+                        dataType: "Elegoo Canvas RFID format",
                         filamentType: tagData.profile.type.rawValue,
                         filamentSubtype: tagData.profile.type.subtype(id: tagData.profile.subtypeId)?.name,
                         extruderMin: tagData.profile.temperatures.extruderMin,
