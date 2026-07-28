@@ -682,18 +682,8 @@ extension NFCManager: NFCTagReaderSessionDelegate {
                 
                 // Check if auto-verify is enabled
                 if AppSettings.shared.autoVerifyEnabled {
-                    // Wait a moment then start verification in new session
-                    nonisolated(unsafe) let capturedSession = session
-                    DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-                        capturedSession.invalidate()
-                        
-                        // Auto-start verify session after longer delay to ensure tag is ready
-                        // Increased from 1.0 to 1.5 seconds to prevent session errors
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                            self.currentOperation = .verifyWrite
-                            self.startSession(with: "Hold near tag to verify write...")
-                        }
-                    }
+                    session.alertMessage = "Verifying write..."
+                    self.performVerifyWrite(tag: tag, session: session)
                 } else {
                     // Just close the session without verify
                     DispatchQueue.main.async {
