@@ -227,8 +227,12 @@ class NFCManager: NSObject, ObservableObject {
             let readDynamicLock = Data([0x30, 0x28]) // Read page 40
             tag.sendMiFareCommand(commandPacket: readDynamicLock) { response2, error2 in
                 if let error2 = error2 {
-                    lockInfo += "\n⚠️ Could not read dynamic lock bytes: \(error2.localizedDescription)\n"
-                    lockInfo += "(Tag might be NTAG213 without dynamic locks)"
+                    if error2.localizedDescription.contains("Tag connection lost") || error2.localizedDescription.contains("Session invalidated") {
+                        lockInfo += "\n⚠️ Could not read dynamic lock bytes: Tag connection lost during read.\n"
+                        lockInfo += "If a tag was present, it may be an NTAG213 (no dynamic locks) or the tag moved. Try again while holding steady."
+                    } else {
+                        lockInfo += "\n⚠️ Could not read dynamic lock bytes: \(error2.localizedDescription)"
+                    }
                     completion(lockInfo)
                     return
                 }
