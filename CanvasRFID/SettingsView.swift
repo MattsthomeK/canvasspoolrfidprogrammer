@@ -46,7 +46,14 @@ struct SettingsView: View {
                 }
                 
                 // Reset Section
-                Section(footer: Text("This will reset all settings to their default values.")) {
+                Section(footer: Text("""
+Resets NFC and display preferences only:
+- Auto-Verify After Write → On
+- Haptic Feedback → On
+- Show Debug Information → Off
+- Default Spool Size → 1 kg
+- Temperature Unit → Celsius
+""")) {
                     Button(role: .destructive) {
                         settings.resetToDefaults()
                     } label: {
