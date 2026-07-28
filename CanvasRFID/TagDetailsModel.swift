@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct TagDetails {
     let uid: String
@@ -15,7 +16,12 @@ struct TagDetails {
     let readDate: Date
     let hasData: Bool
     let dataType: String?
-    
+    let filamentType: String?
+    let filamentSubtype: String?
+    let extruderMin: Int?
+    let extruderMax: Int?
+    let filamentColor: Color?
+
     var memoryUsagePercent: Double {
         guard memoryTotal > 0 else { return 0 }
         return Double(memoryUsed) / Double(memoryTotal) * 100

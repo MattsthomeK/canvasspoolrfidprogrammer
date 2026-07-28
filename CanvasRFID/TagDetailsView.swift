@@ -117,6 +117,67 @@ struct TagDetailsView: View {
                     .padding()
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(12)
+
+                    // Decoded Filament Data Card
+                    if let filamentType = details.filamentType {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Label("Decoded Filament Data", systemImage: "thermometer")
+                                .font(.headline)
+
+                            HStack {
+                                Text("Type")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text(filamentType)
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                            }
+
+                            if let filamentSubtype = details.filamentSubtype {
+                                HStack {
+                                    Text("Subtype")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Spacer()
+                                    Text(filamentSubtype)
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                }
+                            }
+
+                            if let extruderMin = details.extruderMin, let extruderMax = details.extruderMax {
+                                HStack {
+                                    Text("Extruder")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Spacer()
+                                    Text("\(extruderMin)–\(extruderMax)°C")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                }
+                            }
+
+                            if let filamentColor = details.filamentColor {
+                                HStack {
+                                    Text("Color")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                    Spacer()
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .fill(filamentColor)
+                                        .frame(width: 44, height: 24)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 6)
+                                                .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
+                                        )
+                                }
+                            }
+                        }
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(12)
+                    }
                 }
                 .padding()
             }
@@ -153,6 +214,11 @@ struct TagDetailsView: View {
         memoryTotal: 504,
         readDate: Date(),
         hasData: true,
-        dataType: "PLA Filament"
+        dataType: "PLA Filament",
+        filamentType: "PLA",
+        filamentSubtype: "PLA+",
+        extruderMin: 190,
+        extruderMax: 230,
+        filamentColor: .blue
     ))
 }

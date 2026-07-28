@@ -142,7 +142,12 @@ struct ContentView: View {
                         memoryTotal: 504,
                         readDate: Date(),
                         hasData: true,
-                        dataType: "Filament: \(tagData.profile.name)"
+                        dataType: "Filament: \(tagData.profile.name)",
+                        filamentType: tagData.profile.type.rawValue,
+                        filamentSubtype: tagData.profile.type.subtype(id: tagData.profile.subtypeId)?.name,
+                        extruderMin: tagData.profile.temperatures.extruderMin,
+                        extruderMax: tagData.profile.temperatures.extruderMax,
+                        filamentColor: tagData.color
                     )
                     currentTagDetails = tagDetails
                     showingTagDetails = true
