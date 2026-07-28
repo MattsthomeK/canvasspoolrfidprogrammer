@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A000001000000000000001 /* SpoolProgrammerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000002000000000000001 /* SpoolProgrammerApp.swift */; };
+		1A000001000000000000001 /* CanvasRFIDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000002000000000000001 /* CanvasRFIDApp.swift */; };
 		1A000003000000000000001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000004000000000000001 /* ContentView.swift */; };
 		1A000005000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A000006000000000000001 /* Assets.xcassets */; };
 		1A000007000000000000001 /* NFCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000008000000000000001 /* NFCManager.swift */; };
@@ -22,15 +22,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A000002000000000000001 /* SpoolProgrammerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoolProgrammerApp.swift; sourceTree = "<group>"; };
+		1A000002000000000000001 /* CanvasRFIDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasRFIDApp.swift; sourceTree = "<group>"; };
 		1A000004000000000000001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1A000006000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A000008000000000000001 /* NFCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCManager.swift; sourceTree = "<group>"; };
 		1A000010000000000000001 /* FilamentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilamentModel.swift; sourceTree = "<group>"; };
 		1A000012000000000000001 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
-		1A000013000000000000001 /* SpoolProgrammer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpoolProgrammer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A000013000000000000001 /* CanvasRFID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanvasRFID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A000014000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A000015000000000000001 /* ACE_RFID_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACE_RFID_iOS.entitlements; sourceTree = "<group>"; };
+		1A000015000000000000001 /* CanvasRFID.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CanvasRFID.entitlements; sourceTree = "<group>"; };
 		1A000032000000000000001 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A000034000000000000001 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		1A000036000000000000001 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -53,17 +53,17 @@
 		1A000017000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				1A000018000000000000001 /* ACE_RFID_iOS */,
+				1A000018000000000000001 /* CanvasRFID */,
 				1A000019000000000000001 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1A000018000000000000001 /* ACE_RFID_iOS */ = {
+		1A000018000000000000001 /* CanvasRFID */ = {
 			isa = PBXGroup;
 			children = (
 				1A000014000000000000001 /* Info.plist */,
-				1A000015000000000000001 /* ACE_RFID_iOS.entitlements */,
-				1A000002000000000000001 /* SpoolProgrammerApp.swift */,
+				1A000015000000000000001 /* CanvasRFID.entitlements */,
+				1A000002000000000000001 /* CanvasRFIDApp.swift */,
 				1A000004000000000000001 /* ContentView.swift */,
 				1A000008000000000000001 /* NFCManager.swift */,
 				1A000010000000000000001 /* FilamentModel.swift */,
@@ -76,13 +76,13 @@
 				1A000006000000000000001 /* Assets.xcassets */,
 				1A000032000000000000001 /* LaunchScreen.storyboard */,
 			);
-			path = ACE_RFID_iOS;
+			path = CanvasRFID;
 			sourceTree = "<group>";
 		};
 		1A000019000000000000001 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A000013000000000000001 /* SpoolProgrammer.app */,
+				1A000013000000000000001 /* CanvasRFID.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,9 +90,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1A000020000000000000001 /* ACE_RFID_iOS */ = {
+		1A000020000000000000001 /* CanvasRFID */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A000021000000000000001 /* Build configuration list for PBXNativeTarget "ACE_RFID_iOS" */;
+			buildConfigurationList = 1A000021000000000000001 /* Build configuration list for PBXNativeTarget "CanvasRFID" */;
 			buildPhases = (
 				1A000022000000000000001 /* Sources */,
 				1A000016000000000000001 /* Frameworks */,
@@ -102,9 +102,9 @@
 			);
 			dependencies = (
 			);
-			name = ACE_RFID_iOS;
-			productName = ACE_RFID_iOS;
-			productReference = 1A000013000000000000001 /* SpoolProgrammer.app */;
+			name = CanvasRFID;
+			productName = CanvasRFID;
+			productReference = 1A000013000000000000001 /* CanvasRFID.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -122,7 +122,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1A000025000000000000001 /* Build configuration list for PBXProject "ACE_RFID_iOS" */;
+			buildConfigurationList = 1A000025000000000000001 /* Build configuration list for PBXProject "CanvasRFID" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -135,7 +135,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A000020000000000000001 /* ACE_RFID_iOS */,
+				1A000020000000000000001 /* CanvasRFID */,
 			);
 		};
 /* End PBXProject section */
@@ -158,7 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A000003000000000000001 /* ContentView.swift in Sources */,
-				1A000001000000000000001 /* SpoolProgrammerApp.swift in Sources */,
+				1A000001000000000000001 /* CanvasRFIDApp.swift in Sources */,
 				1A000007000000000000001 /* NFCManager.swift in Sources */,
 				1A000009000000000000001 /* FilamentModel.swift in Sources */,
 				1A000011000000000000001 /* ColorPickerView.swift in Sources */,
@@ -299,14 +299,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ACE_RFID_iOS/ACE_RFID_iOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CanvasRFID/CanvasRFID.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = RXX3MVVLWC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = ACE_RFID_iOS/Info.plist;
+				INFOPLIST_FILE = CanvasRFID/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSNFCReaderUsageDescription = "This app needs NFC access to read and write RFID tags for filament spool programming.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -320,7 +320,7 @@
 				);
 				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattsthomek.canvasspoolprogrammer;
-				PRODUCT_NAME = SpoolProgrammer;
+				PRODUCT_NAME = CanvasRFID;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -333,14 +333,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = ACE_RFID_iOS/ACE_RFID_iOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CanvasRFID/CanvasRFID.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = RXX3MVVLWC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = ACE_RFID_iOS/Info.plist;
+				INFOPLIST_FILE = CanvasRFID/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSNFCReaderUsageDescription = "This app needs NFC access to read and write RFID tags for filament spool programming.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -354,7 +354,7 @@
 				);
 				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattsthomek.canvasspoolprogrammer;
-				PRODUCT_NAME = SpoolProgrammer;
+				PRODUCT_NAME = CanvasRFID;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -365,7 +365,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A000021000000000000001 /* Build configuration list for PBXNativeTarget "ACE_RFID_iOS" */ = {
+		1A000021000000000000001 /* Build configuration list for PBXNativeTarget "CanvasRFID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A000028000000000000001 /* Debug */,
@@ -374,7 +374,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A000025000000000000001 /* Build configuration list for PBXProject "ACE_RFID_iOS" */ = {
+		1A000025000000000000001 /* Build configuration list for PBXProject "CanvasRFID" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1A000026000000000000001 /* Debug */,

@@ -1,6 +1,6 @@
 //
-//  ACE_RFID_iOSTests.swift
-//  ACE RFID iOS Tests
+//  CanvasRFIDTests.swift
+//  CanvasRFID
 //
 //  Comprehensive unit tests for data models and business logic
 //

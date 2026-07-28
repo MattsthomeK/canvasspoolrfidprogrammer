@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1A000020000000000000001"
-               BuildableName = "SpoolProgrammer.app"
-               BlueprintName = "ACE_RFID_iOS"
-               ReferencedContainer = "container:ACE_RFID_iOS.xcodeproj">
+               BuildableName = "CanvasRFID.app"
+               BlueprintName = "CanvasRFID"
+               ReferencedContainer = "container:CanvasRFID.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A000020000000000000001"
-            BuildableName = "SpoolProgrammer.app"
-            BlueprintName = "ACE_RFID_iOS"
-            ReferencedContainer = "container:ACE_RFID_iOS.xcodeproj">
+            BuildableName = "CanvasRFID.app"
+            BlueprintName = "CanvasRFID"
+            ReferencedContainer = "container:CanvasRFID.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A000020000000000000001"
-            BuildableName = "SpoolProgrammer.app"
-            BlueprintName = "ACE_RFID_iOS"
-            ReferencedContainer = "container:ACE_RFID_iOS.xcodeproj">
+            BuildableName = "CanvasRFID.app"
+            BlueprintName = "CanvasRFID"
+            ReferencedContainer = "container:CanvasRFID.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

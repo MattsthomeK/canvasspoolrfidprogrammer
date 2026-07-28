@@ -1,6 +1,6 @@
 //
 //  FilamentModel.swift
-//  ACE RFID iOS
+//  CanvasRFID
 //
 //  Data models for filament management
 //

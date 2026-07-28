@@ -1,6 +1,6 @@
 //
 //  NFCManager.swift
-//  ACE RFID iOS
+//  CanvasRFID
 //
 //  NFC Tag Reading and Writing Manager
 //

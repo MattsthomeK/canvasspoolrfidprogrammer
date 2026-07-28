@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  ACE RFID iOS
+//  CanvasRFID
 //
 //  Modern UI/UX redesign following Apple Human Interface Guidelines
 //
