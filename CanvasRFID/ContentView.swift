@@ -117,7 +117,7 @@ struct ContentView: View {
                 AboutView()
             }
             .sheet(isPresented: $showingSettings) {
-                SettingsView(settings: settings)
+                SettingsView(settings: settings, database: filamentDB)
             }
             .sheet(isPresented: $showingTagDetails) {
                 if let details = currentTagDetails {

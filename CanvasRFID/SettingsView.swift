@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var settings: AppSettings
+    @ObservedObject var database: FilamentDatabase
     @Environment(\.dismiss) var dismiss
+    @State private var showingClearProfilesConfirmation = false
     
     var body: some View {
         NavigationStack {
@@ -54,6 +56,18 @@ struct SettingsView: View {
                         }
                     }
                 }
+
+                // Clear Filament Profiles Section
+                Section(footer: Text("This will delete all custom filament profiles and restore the original defaults.")) {
+                    Button(role: .destructive) {
+                        showingClearProfilesConfirmation = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Clear All Filament Profiles")
+                        }
+                    }
+                }
                 
                 // App Info
                 Section(header: Text("About")) {
@@ -81,10 +95,18 @@ struct SettingsView: View {
                     }
                 }
             }
+            .alert("Clear All Filament Profiles?", isPresented: $showingClearProfilesConfirmation) {
+                Button("Cancel", role: .cancel) {}
+                Button("Clear Profiles", role: .destructive) {
+                    database.resetToDefaultProfiles()
+                }
+            } message: {
+                Text("This will delete all saved filament profiles and restore the default set. This cannot be undone.")
+            }
         }
     }
 }
 
 #Preview {
-    SettingsView(settings: AppSettings.shared)
+    SettingsView(settings: AppSettings.shared, database: FilamentDatabase())
 }

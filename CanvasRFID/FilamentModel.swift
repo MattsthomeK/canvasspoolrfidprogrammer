@@ -227,6 +227,12 @@ class FilamentDatabase: ObservableObject {
         }
     }
 
+    func resetToDefaultProfiles() {
+        UserDefaults.standard.removeObject(forKey: "allFilamentProfiles")
+        profiles = createDefaultProfiles()
+        saveProfiles()
+    }
+
     func addProfile(_ profile: FilamentProfile) {
         var newProfile = profile
         newProfile.isCustom = true
