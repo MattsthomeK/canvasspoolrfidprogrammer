@@ -99,7 +99,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showingEditFilament) {
                 if let profile = selectedProfile {
-                    EditFilamentView(database: filamentDB, profile: profile) { updatedProfile in
+                    EditFilamentView(database: filamentDB, profile: profile, selectedColor: $selectedColor, selectedSpoolSize: $selectedSpoolSize) { updatedProfile in
                         selectedProfile = updatedProfile
                     }
                 }
@@ -318,83 +318,38 @@ struct FilamentSelectionCard: View {
             // Profile Details
             if let profile = selectedProfile {
                 VStack(spacing: 12) {
-                    Divider()
-                    
-                    DetailRow(icon: "tag", label: "Type", value: profile.type.rawValue)
-                    DetailRow(icon: "atom", label: "Subtype", value: profile.subtypeName)
-                    
-                    Divider()
-                    
                     // Temperatures
                     VStack(alignment: .leading, spacing: 8) {
-                        Label("Temperature Settings", systemImage: "thermometer")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        
-                        HStack(spacing: 16) {
-                            TemperatureBadge(
-                                icon: "flame",
-                                label: "Extruder",
-                                range: "\(profile.temperatures.extruderMin)-\(profile.temperatures.extruderMax)°C"
-                            )
-                        }
-                    }
-                    
-                    // Edit/Delete buttons for all profiles (users can manage their own list)
-                    Divider()
-                    
-                    HStack(spacing: 12) {
-                        Button(action: { showingEditFilament = true }) {
-                            Label("Edit", systemImage: "pencil")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.bordered)
-                        
-                        Button(role: .destructive, action: {
-                            filamentDB.deleteProfile(profile)
-                            selectedProfile = nil
-                        }) {
-                            Label("Delete", systemImage: "trash")
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(.bordered)
+                        DetailRow(icon: "flame", label: "Extruder Temp", value: "\(profile.temperatures.extruderMin)-\(profile.temperatures.extruderMax)°C")
                     }
 
-                    Divider()
-
-                    Label("Spool Settings", systemImage: "gearshape.fill")
-                        .font(.headline)
-
                     HStack(spacing: 12) {
-                        // Color Picker
-                        Button(action: { showingColorPicker = true }) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack(spacing: 6) {
-                                    Image(systemName: "paintpalette")
-                                        .font(.caption)
-                                    Text("Color")
-                                        .font(.subheadline)
-                                }
-                                .foregroundColor(.secondary)
-
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(selectedColor)
-                                    .frame(height: 50)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
-                                    )
+                        // Color Display
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "paintpalette")
+                                    .font(.caption)
+                                Text("Color")
+                                    .font(.subheadline)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding(12)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color(.secondarySystemGroupedBackground))
-                            )
-                        }
-                        .buttonStyle(.plain)
+                            .foregroundColor(.secondary)
 
-                        // Spool Size Picker
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(selectedColor)
+                                .frame(height: 50)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
+                                )
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color(.secondarySystemGroupedBackground))
+                        )
+
+                        // Spool Size Display
                         VStack(alignment: .leading, spacing: 8) {
                             HStack(spacing: 6) {
                                 Image(systemName: "scalemass")
@@ -404,37 +359,17 @@ struct FilamentSelectionCard: View {
                             }
                             .foregroundColor(.secondary)
 
-                            Menu {
-                                ForEach(SpoolSize.allCases, id: \.self) { size in
-                                    Button(action: {
-                                        withAnimation(.spring(response: 0.2)) {
-                                            selectedSpoolSize = size
-                                        }
-                                    }) {
-                                        HStack {
-                                            Text(size.rawValue)
-                                            if selectedSpoolSize == size {
-                                                Image(systemName: "checkmark")
-                                            }
-                                        }
-                                    }
-                                }
-                            } label: {
-                                HStack {
-                                    Text(selectedSpoolSize.rawValue)
-                                        .foregroundColor(.primary)
-                                    Spacer()
-                                    Image(systemName: "chevron.up.chevron.down")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                                .frame(height: 50)
-                                .padding(.horizontal, 12)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color(.tertiarySystemGroupedBackground))
-                                )
+                            HStack {
+                                Text(selectedSpoolSize.rawValue)
+                                    .foregroundColor(.primary)
+                                Spacer()
                             }
+                            .frame(height: 50)
+                            .padding(.horizontal, 12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color(.tertiarySystemGroupedBackground))
+                            )
                         }
                         .frame(maxWidth: .infinity)
                         .padding(12)
@@ -442,6 +377,26 @@ struct FilamentSelectionCard: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .fill(Color(.secondarySystemGroupedBackground))
                         )
+                    }
+
+                    // Edit/Delete buttons for all profiles (users can manage their own list)
+                    Divider()
+
+                    HStack(spacing: 12) {
+                        Button(action: { showingEditFilament = true }) {
+                            Label("Edit", systemImage: "pencil")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.bordered)
+
+                        Button(role: .destructive, action: {
+                            filamentDB.deleteProfile(profile)
+                            selectedProfile = nil
+                        }) {
+                            Label("Delete", systemImage: "trash")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.bordered)
                     }
                 }
             }
@@ -776,6 +731,8 @@ struct AddFilamentView: View {
 struct EditFilamentView: View {
     @ObservedObject var database: FilamentDatabase
     let profile: FilamentProfile
+    @Binding var selectedColor: Color
+    @Binding var selectedSpoolSize: SpoolSize
     var onSave: (FilamentProfile) -> Void = { _ in }
     @Environment(\.dismiss) var dismiss
 
@@ -783,10 +740,13 @@ struct EditFilamentView: View {
     @State private var subtypeId: UInt8
     @State private var extruderMin: Int
     @State private var extruderMax: Int
+    @State private var showingColorPicker = false
 
-    init(database: FilamentDatabase, profile: FilamentProfile, onSave: @escaping (FilamentProfile) -> Void = { _ in }) {
+    init(database: FilamentDatabase, profile: FilamentProfile, selectedColor: Binding<Color>, selectedSpoolSize: Binding<SpoolSize>, onSave: @escaping (FilamentProfile) -> Void = { _ in }) {
         self._database = ObservedObject(wrappedValue: database)
         self.profile = profile
+        self._selectedColor = selectedColor
+        self._selectedSpoolSize = selectedSpoolSize
         self.onSave = onSave
         _type = State(initialValue: profile.type)
         _subtypeId = State(initialValue: profile.subtypeId)
@@ -814,6 +774,29 @@ struct EditFilamentView: View {
                 Section("Temperature Settings") {
                     Stepper("Extruder Min: \(extruderMin)°C", value: $extruderMin, in: 150...350, step: 5)
                     Stepper("Extruder Max: \(extruderMax)°C", value: $extruderMax, in: 150...350, step: 5)
+                }
+
+                Section("Spool Settings") {
+                    Button(action: { showingColorPicker = true }) {
+                        HStack {
+                            Text("Color")
+                                .foregroundColor(.primary)
+                            Spacer()
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(selectedColor)
+                                .frame(width: 44, height: 24)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
+                                )
+                        }
+                    }
+
+                    Picker("Spool Size", selection: $selectedSpoolSize) {
+                        ForEach(SpoolSize.allCases, id: \.self) { size in
+                            Text(size.rawValue).tag(size)
+                        }
+                    }
                 }
             }
             .navigationTitle("Edit Filament")
@@ -852,6 +835,9 @@ struct EditFilamentView: View {
                     extruderMin = subtype.extruderMin
                     extruderMax = subtype.extruderMax
                 }
+            }
+            .sheet(isPresented: $showingColorPicker) {
+                ColorPickerView(selectedColor: $selectedColor)
             }
         }
     }
