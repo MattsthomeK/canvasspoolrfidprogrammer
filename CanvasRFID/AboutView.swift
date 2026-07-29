@@ -116,19 +116,19 @@ struct AboutView: View {
                         LinkButton(
                             title: "GitHub Repository",
                             systemImage: "chevron.left.forwardslash.chevron.right",
-                            url: "https://github.com/MattsthomeK/canvasspoolrfidprogrammer"
+                            url: "https://github.com/AnxiousDoorMat/canvasspoolrfidprogrammer"
                         )
 
                         LinkButton(
                             title: "Privacy Policy",
                             systemImage: "hand.raised.fill",
-                            url: "https://github.com/MattsthomeK/canvasspoolrfidprogrammer/blob/main/PRIVACY_POLICY.md"
+                            url: "https://github.com/AnxiousDoorMat/canvasspoolrfidprogrammer/blob/main/PRIVACY_POLICY.md"
                         )
                         
                         LinkButton(
                             title: "Report Issue",
                             systemImage: "exclamationmark.bubble.fill",
-                            url: "https://github.com/MattsthomeK/canvasspoolrfidprogrammer/issues"
+                            url: "https://github.com/AnxiousDoorMat/canvasspoolrfidprogrammer/issues"
                         )
                     }
                     .padding(.horizontal)

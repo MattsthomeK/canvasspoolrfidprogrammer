@@ -55,7 +55,7 @@ Canvas RFID does not knowingly collect data from anyone, including children unde
 
 ## Open Source
 
-Canvas RFID is open source. You can review the source code at: https://github.com/MattsthomeK/canvasspoolrfidprogrammer — which is forked from martinbogo's rfidspoolprogrammer (MIT license).
+Canvas RFID is open source. You can review the source code at: https://github.com/AnxiousDoorMat/canvasspoolrfidprogrammer — which is forked from martinbogo's rfidspoolprogrammer (MIT license).
 
 ## Changes to This Policy
 
@@ -63,7 +63,7 @@ If we ever change our approach to privacy (which we don't plan to), we will upda
 
 ## Contact
 
-If you have questions about this privacy policy, please open an issue at https://github.com/MattsthomeK/canvasspoolrfidprogrammer/issues or contact via the App Store.
+If you have questions about this privacy policy, please open an issue at https://github.com/AnxiousDoorMat/canvasspoolrfidprogrammer/issues or contact via the App Store.
 
 ## Your Rights
 
